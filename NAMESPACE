@@ -1,0 +1,13 @@
+export(dbEmpLikeGOF,
+       returnCutoff,
+       
+       testfun,
+       testfun2,
+       emplikeGOFinternal,
+       distEqInternal,
+       equation210,
+       testfun5,
+       helperPval,
+       getPval,
+       getCutoff
+       )
