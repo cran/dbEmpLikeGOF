@@ -8,8 +8,14 @@
 
 \documentclass[]{article}
 
+\def\firstMarker{$^*$}
+\def\secondMarker{$\dagger$}
+\def\thirdMarker{$\diamond$}
+
+
+
 \title{A tutorial dbEmpLikeGOF R package}
-\author{Jeffrey C. Miecznikowski, Albert Vexler,  and  Lori A. Shepherd}
+\author{Jeffrey C. Miecznikowski\firstMarker, Albert Vexler\secondMarker,  and  Lori A. Shepherd\thirdMarker}
 
 \begin{document}
 
@@ -24,7 +30,7 @@ Roswell Park Cancer Institute
 
 \begin{center}
 
-{\tt jcm38@buffalo.edu, las65@buffalo.edu}
+{\tt \firstMarker jcm38@buffalo.edu, \secondMarker avexler@buffalo.edu, \thirdMarker las65@buffalo.edu}
 \end{center}
 
 

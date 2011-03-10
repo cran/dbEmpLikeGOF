@@ -67,8 +67,8 @@ dbEmpLikeGOF(x,
 }
 \value{
   Returns a vector of length 2 with test statistic and p-value.
-  \item{statistic}{the value of the test statistic}
-  \item{p.value}{the p-value for the test}
+  \item{teststat}{the value of the test statistic}
+  \item{pvalue}{the p-value for the test}
 }
 \references{
   Vexler A, Gurevich G, Empirical likelihood ratios applied to
