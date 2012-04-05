@@ -4,7 +4,7 @@
 #
 testfun <- function(m, n, x.o){
    
-  tempx.o=c()
+  #tempx.o=c()
   nvl = 1:n
   lep = rep(NA, n)
   rep = rep(NA, n)
@@ -45,7 +45,10 @@ testfun5 <- function(x,y,j,m,i){
 
 #
 # equation 2.10 in paper to be used in testfun5 for equation 2.16 
-#
+#  Vexler A, Yu J, Tian L, Liu S (2010). “Two-sample nonparametric likelihood inference based
+#  on incomplete data with an application to a pneumonia study.” Biometrical Journal, 52(3),
+#  348–361.
+
 
 equation210 <- function(x,y,m,i,j){
 
@@ -514,7 +517,7 @@ emplikeGOFinternal <- function(x, testcall=c("uniform", "normal"), delta=0.50){
       # get test stat
       #
       n=length(x)
-      tomin=c()
+      #tomin=c()
       x.o=sort(x)
       m = 1:n^(1-delta)
       tomin = mapply("testfun", m=m, MoreArgs=list(x.o=x.o, n=n))
@@ -565,7 +568,7 @@ distEqInternal <-function(x,y,delta.equality=0.10){
   mvc = seq(l1,u1,by=1)
   j1 = 1:n1
   i=1
-  tomin1 = c()
+  #tomin1 = c()
   tomin1 = mapply("testfun5", m=mvc, MoreArgs=list(x=x,y=y,i=i, j=j1))
   ans.pt1 = min(tomin1)
   
@@ -575,7 +578,7 @@ distEqInternal <-function(x,y,delta.equality=0.10){
   vvc = seq(l2,u2, by=1)
   j2 = 1:n2
   i=2
-  tomin2 = c()
+  #tomin2 = c()
   tomin2 = mapply("testfun5", m=vvc, MoreArgs=list(x=x,y=y,i=i, j=j2))
   ans.pt2 = min(tomin2)
   
@@ -639,7 +642,7 @@ getCutoff <- function(testcall, smp.size, targetalpha){
     rowdx = which(rownames(testmat) == targetalpha)
     if(length(rowdx)==0){
       cat("Rounding target alpha: ", targetalpha, " to ")
-      targetalpha = round(targetalpha, digit=3)
+      targetalpha = round(targetalpha, digits=3)
       cat(targetalpha, ".\n For more accurate calculation use monte carlo method [pvl.Table=FALSE] \n")
     }
     rowdx = which(rownames(testmat) == targetalpha)
@@ -678,7 +681,7 @@ getCutoff <- function(testcall, smp.size, targetalpha){
     rowdx = which(rownames(testmat) == targetalpha)
     if(length(rowdx)==0){
       cat("Rounding target alpha: ", targetalpha, " to ")
-      targetalpha = round(targetalpha, digit=3)
+      targetalpha = round(targetalpha, digits=3)
       cat(targetalpha, ".\n For more accurate calculation use monte carlo method [pvl.Table=FALSE] \n")
     }
     rowdx = which(rownames(testmat) == targetalpha)

@@ -1,0 +1,130 @@
+% \VignetteIndexEntry{Tutorial}
+% \VignetteDepends{dbEmpLikeGOF}
+% \VignetteKeyword{dbEmpLikeGOF}
+% \VignetteKeyword{tutorial}
+% \VignetteKeyword{manual}
+
+
+
+\documentclass[]{article}
+
+\def\firstMarker{$^*$}
+\def\secondMarker{$\dagger$}
+\def\thirdMarker{$\diamond$}
+
+
+
+\title{A tutorial dbEmpLikeGOF R package}
+\author{Jeffrey C. Miecznikowski\firstMarker, Albert Vexler\secondMarker,  and  Lori A. Shepherd\thirdMarker}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+Statistical Genetics and Genomics Research Group\\
+Department of Biostatistics, University at Buffalo\\
+New York State Center of Excellence in Bioinformatics and Life Sciences\\
+Roswell Park Cancer Institute
+\end{center}
+
+\begin{center}
+
+{\tt \firstMarker jcm38@buffalo.edu, \secondMarker avexler@buffalo.edu, \thirdMarker las65@buffalo.edu}
+\end{center}
+
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+
+The dbEmplikeGOF package provides a function dbEmplikeGOF to be used
+for density based empirical likelihood (EL) goodness-of-fit tests based on sample
+entropy, as well as to perform the two sample EL ratio test for
+distribution equality.  The function provides the test statistic and
+associated p-values. The p-value can be calculated by Monte-Carlo methods or
+estimated based on precalculated tables of selected sample sizes and
+alpha values. For details and algorithms: 
+
+\begin{verbatim}
+  Vexler A, Gurevich G, Empirical likelihood ratios applied to
+  goodness-of-fit tests based on sample entropy.  Computational
+  Statistics and Data Analysis 54(2010) 531-545.
+
+  Gurevich G, Vexler A, A two-sample empirical likelihood ratio
+  test based on sample entropy.  Statistics and Computing, 2011.
+
+\end{verbatim}
+
+
+\section{Examples}
+
+The following performs a density-based empirical likelihood based goodness-of-fit
+tests based on sample entropy and calculates the p-value based on
+Monte-Carlo methods.   The examples examine three null hypothesis, 1)
+data follows a normal distribution with unknown mean and standard
+deviation, 2) data follows a uniform distribution on 0 to 1 and 3)
+data from two samples are from the same distribution.  The example
+below tests the data (\verb=normData=) against the normal distribution.
+ 
+<<echo=TRUE, results=verbatim>>=
+
+library(dbEmpLikeGOF)
+normData = rnorm(25)
+dbEmpLikeGOF(x=normData, testcall="normal", pvl.Table=FALSE)
+
+@
+
+The p-value can be estimated based on precalulated tables rather than
+preforming Monte-Carlo methods.  This is controlled by the argument
+pvl.Table. To estimate based on tables pvl.Table argument is TRUE,
+which is the default setting.  
+
+<<echo=TRUE, results=verbatim>>=
+
+dbEmpLikeGOF(x=normData, testcall="normal", pvl.Table=TRUE)
+
+@  
+
+Similar calculations can be made to test data against a uniform
+distribution on zero to one.  
+
+<<echo=TRUE, results=verbatim>>=
+
+unifData = runif(30)
+# calculates pvalue based on Monte-Carlo methods
+dbEmpLikeGOF(x=unifData, testcall="uniform", pvl.Table=FALSE)
+# estimates pvalue based on tables
+dbEmpLikeGOF(x=unifData, testcall="uniform", pvl.Table=TRUE)
+
+@
+
+Notice the data in each of the above examples was designed to match the proposed
+distribution. Below is an example where the data does not follow the proposed distribution
+
+<<echo=TRUE, results=verbatim>>=
+
+dbEmpLikeGOF(x=unifData, testcall="normal", pvl.Table=TRUE)
+
+@
+
+It is also possible to test for distribution equality between two
+samples.  When specifying an \verb=x= and \verb=y= samples, the
+\verb=dbEmpLikeGOF= function will test for distribution equality
+between the two samples.
+
+<<echo=TRUE, results=verbatim>>=
+
+dbEmpLikeGOF(x=unifData, y=normData, pvl.Table=TRUE)
+
+normDataSet2 = rnorm(40)
+dbEmpLikeGOF(x=normDataSet2, y=normData, pvl.Table=TRUE)
+
+@
+
+Notice the sample vectors do not have to be of equal length. 
+
+
+\end{document}

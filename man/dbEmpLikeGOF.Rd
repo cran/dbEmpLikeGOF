@@ -81,13 +81,13 @@ dbEmpLikeGOF(x,
 \author{Jeffrey C. Miecznikowski, Lori A. Shepherd}
 \examples{
 
- x=rnorm(100)
- testNorm = dbEmpLikeGOF(x, testcall="normal")
- testUni = dbEmpLikeGOF(x, testcall="uniform")
+ x <- rnorm(100)
+ testNorm <- dbEmpLikeGOF(x, testcall="normal")
+ testUni <- dbEmpLikeGOF(x, testcall="uniform")
  testNorm
  testUni
  y=rnorm(40)
- testDist = dbEmpLikeGOF(x,y)
+ testDist <- dbEmpLikeGOF(x,y)
  testDist
 
 }

@@ -10,13 +10,15 @@ returnCutoff <-function(sample.size,testcall=c("uniform", "normal", "distributio
   }else{
     # until table is produced calucluate then add this option
     if(pvl.Table){
-      cut.out = getCutoff(testcall, sample.size, targetalpha)
+      cut.out <- getCutoff(testcall, sample.size, targetalpha)
     }else{ # ends if estimated by table
-      myalpha=c()
-      cut.out=c()    
-      vec = 1:num.mc
-      z = mapply(FUN="testfun2",vec, MoreArgs=list(sample.size=sample.size, testcall=testcall,delta=delta,delta.equality=delta.equality))
-      cut.out=quantile(z,(1-targetalpha), na.rm=TRUE)
+      
+      #myalpha<-c()
+      #cut.out<-c()    
+
+      vec <- 1:num.mc
+      z <- mapply(FUN="testfun2",vec, MoreArgs=list(sample.size=sample.size, testcall=testcall,delta=delta,delta.equality=delta.equality))
+      cut.out<-quantile(z,(1-targetalpha), na.rm=TRUE)
     }# ends else calculate
     return(cut.out)
   }# end if testcall appropriate   
@@ -41,7 +43,7 @@ dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, d
 
     }else{
       
-      nx=length(x)
+      nx<-length(x)
 
       if(testcall=="uniform"){
     
@@ -49,16 +51,20 @@ dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, d
       # get test stat
       #
         if(vrb) cat("\n...Working on teststat \n") 
-        n=length(x)
-        tomin=c()
-        x.o=sort(x)
-        m = 1:n^(1-delta)
-        tomin = mapply(FUN="testfun", m=m, MoreArgs=list(x.o=x.o, n=n))
+        n<-length(x)
+        
+        #tomin<-c()
+
+        x.o<-sort(x)
+        m <- 1:n^(1-delta)
+        tomin <- mapply(FUN="testfun", m=m, MoreArgs=list(x.o=x.o, n=n))
+        
         #tomin =  apply(FUN="prod", MARGIN=2,tomin)
         #teststat = log(min(tomin))
-        logTomin = log(tomin)
-        sumTomin = apply(FUN="sum", MARGIN=2, logTomin)
-        teststat = min(sumTomin)
+
+        logTomin <- log(tomin)
+        sumTomin <- apply(FUN="sum", MARGIN=2, logTomin)
+        teststat <- min(sumTomin)
 
 
         
@@ -68,30 +74,32 @@ dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, d
       #
         if(pvl.Table){
           if(delta != .5) cat("Table calculated on a delta = 0.5 \n    To use delta=",delta," please change pvl.Table to FALSE \n")
-          pvl = getPval(testcall, teststat, x, y, vrb)          
+          pvl <- getPval(testcall, teststat, x, y, vrb)          
         }else{        
           if(vrb) cat("...Working on p-value \n")
-          mc.est=c()
-          tomin=c()
+          
+          mc.est<-c()
+          #tomin<-c()
+
           for(j in 1:num.mc){
-            x=runif(nx)
-            x.o=sort(x)
-            m = 1:nx^(1-delta)
-            tomin = mapply(FUN="testfun", m=m, MoreArgs=list(x.o=x.o, n=nx))
+            x<-runif(nx)
+            x.o<-sort(x)
+            m <- 1:nx^(1-delta)
+            tomin <- mapply(FUN="testfun", m=m, MoreArgs=list(x.o=x.o, n=nx))
             #tomin =  apply(FUN="prod", MARGIN=2,tomin)
             #mc.est[j] = log(min(tomin))
-            logTomin = log(tomin)
-            sumTomin = apply(FUN="sum", MARGIN=2, logTomin)
-            mc.est[j] = min(sumTomin)
+            logTomin <- log(tomin)
+            sumTomin <- apply(FUN="sum", MARGIN=2, logTomin)
+            mc.est[j] <- min(sumTomin)
           } #end j loop
   
         # count the number of observations on either end of spectrum
-          estp.rh=sum(mc.est>teststat)/num.mc
+          estp.rh<-sum(mc.est>teststat)/num.mc
           #estp.lh=sum(mc.est<teststat)/num.mc
           #pvl = min(estp.rh,estp.lh)
-          pvl = estp.rh 
+          pvl <- estp.rh 
         }
-        output = list(teststat=teststat, pvalue=pvl)
+        output <- list(teststat=teststat, pvalue=pvl)
         
 
       }else{ # if not uniform than normal
@@ -101,17 +109,17 @@ dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, d
       # get test stats
       #
         if(vrb) cat("\n...Working on teststat \n") 
-        n=length(x)
-        m1 = 1:round(n/2)
-        m2 = 1:n^(1-delta)
-        x.o=sort(x)
-        VN2 = mapply(FUN="testfun", m=m2, MoreArgs=list(x.o=x.o, n=n))
+        n<-length(x)
+        m1 <- 1:round(n/2)
+        m2 <- 1:n^(1-delta)
+        x.o<-sort(x)
+        VN2 <- mapply(FUN="testfun", m=m2, MoreArgs=list(x.o=x.o, n=n))
         #VN2 =  apply(FUN="prod", MARGIN=2,VN2)
         #tominVN2 = (2*pi*exp(1)*var(x))^(n/2)*VN2
         #teststat = log(min(tominVN2))
-        logVN2 = log(VN2)
-        sumVN2 = apply(FUN="sum", MARGIN=2, logVN2)
-        teststat = min((((n/2)*log(2*pi*exp(1)*var(x))) + sumVN2))
+        logVN2 <- log(VN2)
+        sumVN2 <- apply(FUN="sum", MARGIN=2, logVN2)
+        teststat <- min((((n/2)*log(2*pi*exp(1)*var(x))) + sumVN2))
 
         
       #
@@ -119,32 +127,37 @@ dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, d
       #
         if(pvl.Table){
           if(delta != .5) cat("Table calculated on a delta = 0.5 \n    To use delta=",delta," please change pvl.Table to FALSE \n")
-          pvl = getPval(testcall, teststat, x, y, vrb)          
+          pvl <- getPval(testcall, teststat, x, y, vrb)          
         }else{        
           if(vrb) cat("...Working on p-value \n")
-          mc.estVN1=mc.estVN2=c()
-          tominVN1=tominVN2=c()
+
+          #mc.estVN1<-mc.estVN2<-c()
+          #tominVN1<-tominVN2<-c()
+          mc.estVN2<-c()
+          
           for(j in 1:num.mc){
-            x=rnorm(nx)
+            x<-rnorm(nx)
             
-            m2 = 1:nx^(1-delta)
-            x.o=sort(x)
-            VN2 = mapply(FUN="testfun", m=m2, MoreArgs=list(x.o=x.o, n=nx))
+            m2 <- 1:nx^(1-delta)
+            x.o<-sort(x)
+            VN2 <- mapply(FUN="testfun", m=m2, MoreArgs=list(x.o=x.o, n=nx))
+            
             #VN2 =  apply(FUN="prod", MARGIN=2,VN2)
             #tominVN2 = (2*pi*exp(1)*var(x))^(nx/2)*VN2
             #  mc.estVN2[j] = min(tominVN2)
-            logVN2 = log(VN2)
-            sumVN2 = apply(FUN="sum", MARGIN=2, logVN2)
-            mc.estVN2[j] = min((((n/2)*log(2*pi*exp(1)*var(x))) + sumVN2))
+
+            logVN2 <- log(VN2)
+            sumVN2 <- apply(FUN="sum", MARGIN=2, logVN2)
+            mc.estVN2[j] <- min((((n/2)*log(2*pi*exp(1)*var(x))) + sumVN2))
             #mc.estVN2[j] = log(min(tominVN2))
             
           }
-          estp.rh=sum(mc.estVN2>teststat)/num.mc
+          estp.rh<-sum(mc.estVN2>teststat)/num.mc
           ###estp.lh=sum(mc.estVN2<teststat)/num.mc
           ##pvl = min(estp.rh,estp.lh)
-          pvl = estp.rh
+          pvl <- estp.rh
         }
-        output = list(teststat=teststat, pvalue=pvl)
+        output <- list(teststat=teststat, pvalue=pvl)
         
       }
       
@@ -154,36 +167,36 @@ dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, d
     
     if( (delta.equality>0.25) & (delta.equality<0) ) stop("delta.equality must be between 0.0 and 0.25")
 
-    testcall="distribution.equality"
+    testcall<-"distribution.equality"
     
     #
     # get test stats
     #
     if(vrb) cat("\n...Working on teststat \n") 
-    n1 = length(x)
-    n2 = length(y)
+    n1 <- length(x)
+    n2 <- length(y)
   
-    l1 = floor(n1^(0.5+delta.equality))
-    u1 = ceiling(min((n1^(1-delta.equality)),(n1/2)))
+    l1 <- floor(n1^(0.5+delta.equality))
+    u1 <- ceiling(min((n1^(1-delta.equality)),(n1/2)))
 
-    mvc = seq(l1,u1,by=1)
-    j1 = 1:n1
-    i=1
-    tomin1 = c()
-    tomin1 = mapply(FUN="testfun5", m=mvc, MoreArgs=list(x=x,y=y,i=i, j=j1))
-    ans.pt1 = min(tomin1)
+    mvc <- seq(l1,u1,by=1)
+    j1 <- 1:n1
+    i<-1
+    #tomin1 <- c()
+    tomin1 <- mapply(FUN="testfun5", m=mvc, MoreArgs=list(x=x,y=y,i=i, j=j1))
+    ans.pt1 <- min(tomin1)
         
-    l2 = floor(n2^(0.5+delta.equality))
-    u2 = ceiling(min((n2^(1-delta.equality)),(n2/2)))
+    l2 <- floor(n2^(0.5+delta.equality))
+    u2 <- ceiling(min((n2^(1-delta.equality)),(n2/2)))
   
-    vvc = seq(l2,u2, by=1)
-    j2 = 1:n2
-    i=2
-    tomin2 = c()
-    tomin2 = mapply(FUN="testfun5", m=vvc, MoreArgs=list(x=x,y=y,i=i, j=j2))
-    ans.pt2 = min(tomin2)
+    vvc <- seq(l2,u2, by=1)
+    j2 <- 1:n2
+    i<-2
+    #tomin2 <- c()
+    tomin2 <- mapply(FUN="testfun5", m=vvc, MoreArgs=list(x=x,y=y,i=i, j=j2))
+    ans.pt2 <- min(tomin2)
 
-    teststat = log((ans.pt1*ans.pt2))
+    teststat <- log((ans.pt1*ans.pt2))
 
  
     #
@@ -191,38 +204,38 @@ dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, d
     #
     if(pvl.Table){
       if(delta.equality != .1) cat("Table calculated on a delta = 0.1 \n    To use delta.equality=",delta.equality," please change pvl.Table to FALSE \n")
-       pvl = getPval(testcall, teststat, x, y, vrb)          
+       pvl <- getPval(testcall, teststat, x, y, vrb)          
     }else{        
       if(vrb) cat("...Working on p-value \n")
-      toMinpvec = c()
+      toMinpvec <- c()
       for(j in 1:num.mc){
-        v1=rnorm(n1,mean=0,sd=1)
-        v2=rnorm(n2,mean=0,sd=1)
-        l1 = floor(n1^(0.5+delta.equality))
-        u1 = ceiling(min((n1^(1-delta.equality)),(n1/2)))
-        mvc = seq(l1,u1,by=1)
-        j1 = 1:n1
-        i=1
-        tomin1 = c()
-        tomin1 = mapply(FUN="testfun5", m=mvc, MoreArgs=list(x=v1,y=v2,i=i, j=j1))
-        ans.pt1 = min(tomin1)
-        l2 = floor(n2^(0.5+delta.equality))
-        u2 = ceiling(min((n2^(1-delta.equality)),(n2/2)))
-        vvc = seq(l2,u2, by=1)
-        j2 = 1:n2
-        i=2
-        tomin2 = c()
-        tomin2 = mapply(FUN="testfun5", m=vvc, MoreArgs=list(x=v1,y=v2,i=i, j=j2))
-        ans.pt2 = min(tomin2)
-        toMinpvec[j] = log((ans.pt1*ans.pt2))     
+        v1<-rnorm(n1,mean=0,sd=1)
+        v2<-rnorm(n2,mean=0,sd=1)
+        l1 <- floor(n1^(0.5+delta.equality))
+        u1 <- ceiling(min((n1^(1-delta.equality)),(n1/2)))
+        mvc <- seq(l1,u1,by=1)
+        j1 <- 1:n1
+        i<-1
+        #tomin1 <- c()
+        tomin1 <- mapply(FUN="testfun5", m=mvc, MoreArgs=list(x=v1,y=v2,i=i, j=j1))
+        ans.pt1 <- min(tomin1)
+        l2 <- floor(n2^(0.5+delta.equality))
+        u2 <- ceiling(min((n2^(1-delta.equality)),(n2/2)))
+        vvc <- seq(l2,u2, by=1)
+        j2 <- 1:n2
+        i<-2
+        #tomin2 <- c()
+        tomin2 <- mapply(FUN="testfun5", m=vvc, MoreArgs=list(x=v1,y=v2,i=i, j=j2))
+        ans.pt2 <- min(tomin2)
+        toMinpvec[j] <- log((ans.pt1*ans.pt2))     
       }
-      estp.rh=sum(toMinpvec>teststat)/num.mc
+      estp.rh<-sum(toMinpvec>teststat)/num.mc
       #estp.lh=sum(toMinpvec<teststat)/num.mc
       #pvl = min(estp.rh,estp.lh)
-      pvl = estp.rh
+      pvl <- estp.rh
     }
     
-    output = list(teststat=teststat, pvalue=pvl)
+    output <- list(teststat=teststat, pvalue=pvl)
    }
   
   return(output)

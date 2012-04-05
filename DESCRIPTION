@@ -1,6 +1,6 @@
 Package: dbEmpLikeGOF
-Version: 1.2.0
-Date: Mar 10, 2011
+Version: 1.2.2
+Date: Apr 5, 2012
 Title: Goodness-of-fit and two sample comparison tests using sample
         entropy
 Author: Jeffrey C. Miecznikowski <jcm38@buffalo.edu> , Lori A. Shepherd
@@ -8,9 +8,11 @@ Author: Jeffrey C. Miecznikowski <jcm38@buffalo.edu> , Lori A. Shepherd
 Maintainer: Lori A. Shepherd <las65@buffalo.edu>
 Description: Goodness-of-fit and two sample comparison tests using
         sample entropy
+LazyData: yes
 License: GPL (>= 2)
 URL:
         http://sphhp.buffalo.edu/biostat/research/software/EmpLike.GOF/index.php
-Packaged: 2011-03-10 15:14:55 UTC; las65
+Packaged: 2012-04-06 13:20:41 UTC; las65
+Depends: R (>= 2.10)
 Repository: CRAN
-Date/Publication: 2011-03-21 19:01:31
+Date/Publication: 2012-04-06 14:49:46
