@@ -3,7 +3,7 @@
 # returns  cutoff given target alpha 
 #
 
-returnCutoff <-function(sample.size,testcall=c("uniform", "normal", "distribution.equality"), targetalpha=.05, num.mc=200, delta=0.5, delta.equality=0.10, pvl.Table=FALSE){
+returnCutoff <-function(sample.size,testcall=c("uniform", "normal", "distribution.equality"), targetalpha=.05, num.mc=200, delta=0.5, delta.equality=0.10, pvl.Table=FALSE, random.seed.flag=TRUE){
 
   if( (testcall != "uniform")  & (testcall != "normal") & (testcall != "distribution.equality")){
     stop("testcall not appropriately defined in function call \n  testcall should be either 'uniform', 'normal', or 'distribution.equality' \n")
@@ -17,7 +17,7 @@ returnCutoff <-function(sample.size,testcall=c("uniform", "normal", "distributio
       #cut.out<-c()    
 
       vec <- 1:num.mc
-      z <- mapply(FUN="testfun2",vec, MoreArgs=list(sample.size=sample.size, testcall=testcall,delta=delta,delta.equality=delta.equality))
+      z <- mapply(FUN="testfun2",vec, MoreArgs=list(sample.size=sample.size, testcall=testcall,delta=delta,delta.equality=delta.equality, random.seed.flag=random.seed.flag))
       cut.out<-quantile(z,(1-targetalpha), na.rm=TRUE)
     }# ends else calculate
     return(cut.out)
@@ -30,7 +30,7 @@ returnCutoff <-function(sample.size,testcall=c("uniform", "normal", "distributio
 # Goodness of Fit function
 #
 
-dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, delta.equality=0.10,num.mc=1000, pvl.Table=TRUE, vrb=TRUE){
+dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, delta.equality=0.10,num.mc=1000, pvl.Table=TRUE, vrb=TRUE, random.seed.flag=TRUE){
 
 
   # if comparing to normal or uniform 
@@ -82,6 +82,10 @@ dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, d
           #tomin<-c()
 
           for(j in 1:num.mc){
+            
+            if(random.seed.flag) {
+              set.seed(j)
+            }    
             x<-runif(nx)
             x.o<-sort(x)
             m <- 1:nx^(1-delta)
@@ -136,6 +140,9 @@ dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, d
           mc.estVN2<-c()
           
           for(j in 1:num.mc){
+            if(random.seed.flag) {
+              set.seed(j)
+            }    
             x<-rnorm(nx)
             
             m2 <- 1:nx^(1-delta)
@@ -209,7 +216,13 @@ dbEmpLikeGOF <- function(x, y=NA, testcall=c("uniform", "normal"), delta=0.50, d
       if(vrb) cat("...Working on p-value \n")
       toMinpvec <- c()
       for(j in 1:num.mc){
+        if(random.seed.flag) {
+          set.seed(j)
+        }    
         v1<-rnorm(n1,mean=0,sd=1)
+        if(random.seed.flag) {
+          set.seed(j+1)
+        }    
         v2<-rnorm(n2,mean=0,sd=1)
         l1 <- floor(n1^(0.5+delta.equality))
         u1 <- ceiling(min((n1^(1-delta.equality)),(n1/2)))

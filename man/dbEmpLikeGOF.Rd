@@ -12,7 +12,8 @@ dbEmpLikeGOF(x,
              delta.equality=0.10,
              num.mc=1000,
              pvl.Table=TRUE,
-             vrb=TRUE)
+             vrb=TRUE,
+             random.seed.flag=TRUE)
 }
 \arguments{
   \item{x}{vector of data values}
@@ -28,7 +29,8 @@ dbEmpLikeGOF(x,
     based on estimates from stored data tables or by using Monte Carlo
     techniques}
   \item{vrb}{logical indicating if status messages should be printed}
-  
+  \item{random.seed.flag}{logical if set seed should be set}
+
 }
 \details{The method employs a density-based empirical likelihood approach to obtain
   test statistic and p-values for a goodness-of-fit tests for uniformity,

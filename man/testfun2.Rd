@@ -7,7 +7,8 @@ testfun2(iter,
          sample.size,
          testcall,
          delta=.5,
-         delta.equality=.1 )
+         delta.equality=.1,
+         random.seed.flag=FALSE)
 }
 \arguments{
   \item{iter}{iteration value for mapply}
@@ -16,6 +17,8 @@ testfun2(iter,
     distribution.equality}
   \item{delta}{delta value when normal or uniform is used}
   \item{delta.equality}{delta when distribution equality is used}
+  \item{random.seed.flag}{logical if set seed should be used. uses value
+  of iteration as seed}
 }
 \details{
   This function is used in a mapply within the return.cutoff

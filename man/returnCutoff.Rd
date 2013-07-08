@@ -9,7 +9,8 @@ returnCutoff(sample.size,
               num.mc=200,
               delta=0.5,
               delta.equality=0.10,
-              pvl.Table=FALSE)
+              pvl.Table=FALSE,
+              random.seed.flag=TRUE)
 }
 \arguments{
   \item{sample.size}{number of observations}
@@ -24,6 +25,7 @@ returnCutoff(sample.size,
   \item{pvl.Table}{logical indicating if value should be calculated
     based on estimates from data table or by using monte carlo
     techniques}
+  \item{random.seed.flag}{logical if set seed should be set}
 }
 \details{
 
