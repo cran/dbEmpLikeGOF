@@ -1,7 +1,7 @@
 ### R code from vignette source 'dbEmpLikeGOF.Rnw'
 
 ###################################################
-### code chunk number 1: dbEmpLikeGOF.Rnw:72-77
+### code chunk number 1: dbEmpLikeGOF.Rnw:81-86
 ###################################################
 
 library(dbEmpLikeGOF)
@@ -11,7 +11,7 @@ dbEmpLikeGOF(x=normData, testcall="normal", pvl.Table=FALSE)
 
 
 ###################################################
-### code chunk number 2: dbEmpLikeGOF.Rnw:85-88
+### code chunk number 2: dbEmpLikeGOF.Rnw:94-97
 ###################################################
 
 dbEmpLikeGOF(x=normData, testcall="normal", pvl.Table=TRUE)
@@ -19,7 +19,7 @@ dbEmpLikeGOF(x=normData, testcall="normal", pvl.Table=TRUE)
 
 
 ###################################################
-### code chunk number 3: dbEmpLikeGOF.Rnw:94-101
+### code chunk number 3: dbEmpLikeGOF.Rnw:103-110
 ###################################################
 
 unifData = runif(30)
@@ -31,7 +31,7 @@ dbEmpLikeGOF(x=unifData, testcall="uniform", pvl.Table=TRUE)
 
 
 ###################################################
-### code chunk number 4: dbEmpLikeGOF.Rnw:107-110
+### code chunk number 4: dbEmpLikeGOF.Rnw:116-119
 ###################################################
 
 dbEmpLikeGOF(x=unifData, testcall="normal", pvl.Table=TRUE)
@@ -39,7 +39,7 @@ dbEmpLikeGOF(x=unifData, testcall="normal", pvl.Table=TRUE)
 
 
 ###################################################
-### code chunk number 5: dbEmpLikeGOF.Rnw:118-124
+### code chunk number 5: dbEmpLikeGOF.Rnw:127-133
 ###################################################
 
 dbEmpLikeGOF(x=unifData, y=normData, pvl.Table=TRUE)

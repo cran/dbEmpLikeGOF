@@ -5,12 +5,15 @@
 % \VignetteKeyword{manual}
 
 
-
 \documentclass[]{article}
 
 \def\firstMarker{$^*$}
 \def\secondMarker{$\dagger$}
 \def\thirdMarker{$\diamond$}
+
+
+\let\proglang=\textsf
+\usepackage{hyperref}
 
 
 
@@ -49,6 +52,12 @@ estimated based on precalculated tables of selected sample sizes and
 alpha values. For details and algorithms: 
 
 \begin{verbatim}
+
+  Jeffrey C. Miecznikowski, Albert Vexler, Lori A. Shepherd
+  (2013). dbEmpLikeGOF: An R Package for Nonparametric Likelihood 
+  Ratio Tests for Goodness-of-Fit and Two-Sample Comparisons Based
+  on Sample Entropy. Journal of Statistical Software, 54(3), 1-19.
+
   Vexler A, Gurevich G, Empirical likelihood ratios applied to
   goodness-of-fit tests based on sample entropy.  Computational
   Statistics and Data Analysis 54(2010) 531-545.
@@ -126,5 +135,17 @@ dbEmpLikeGOF(x=normDataSet2, y=normData, pvl.Table=TRUE)
 
 Notice the sample vectors do not have to be of equal length. 
 
+
+\section{References}
+
+For additional details and examples please see: 
+
+\begin{verbatim}
+  Jeffrey C. Miecznikowski, Albert Vexler, Lori A. Shepherd
+  (2013). dbEmpLikeGOF: An R Package for Nonparametric Likelihood 
+  Ratio Tests for Goodness-of-Fit and Two-Sample Comparisons Based
+  on Sample Entropy. Journal of Statistical Software, 54(3), 1-19.
+\end{verbatim}  \url{http://www.jstatsoft.org/v54/i03/}
+  
 
 \end{document}

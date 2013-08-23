@@ -73,6 +73,13 @@ dbEmpLikeGOF(x,
   \item{pvalue}{the p-value for the test}
 }
 \references{
+
+  Jeffrey C. Miecznikowski, Albert Vexler, Lori A. Shepherd
+  (2013). dbEmpLikeGOF: An R Package for Nonparametric Likelihood Ratio
+  Tests for Goodness-of-Fit and Two-Sample Comparisons Based on Sample
+  Entropy. Journal of Statistical Software, 54(3), 1-19.
+  \url{http://www.jstatsoft.org/v54/i03/}
+
   Vexler A, Gurevich G, Empirical likelihood ratios applied to
   goodness-of-fit tests based on sample entropy.  Computational
   Statistics and Data Analysis 54(2010) 531-545.

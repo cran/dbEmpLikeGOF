@@ -1,0 +1,21 @@
+citHeader("To cite dbEmpLikeGOF: in publications use:")
+
+citEntry(entry = "Article",
+  title        = "{dbEmpLikeGOF:} An {R} Package for Nonparametric Likelihood Ratio Tests for Goodness-of-Fit and Two-Sample Comparisons Based on Sample Entropy",
+  author       = personList(as.person("Jeffrey C. Miecznikowski"),
+                   as.person("Albert Vexler"),
+                   as.person("Lori Shepherd")),
+  journal      = "Journal of Statistical Software",
+  year         = "2013",
+  volume       = "54",
+  number       = "3",
+  pages        = "1--19",
+  url          = "http://www.jstatsoft.org/v54/i03/",
+
+  textVersion  =
+  paste("Jeffrey C. Miecznikowski, Albert Vexler, Lori Shepherd (2013).",
+        "dbEmpLikeGOF: An R Package for Nonparametric Likelihood Ratio Tests for Goodness-of-Fit and Two-Sample Comparisons Based on Sample Entropy.",
+        "Journal of Statistical Software, 54(3), 1-19.",
+        "URL http://www.jstatsoft.org/v54/i03/.")
+)
+
